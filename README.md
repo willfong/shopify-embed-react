@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# Shopify Embedded App (w/React) POC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Useful Links
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- App Bridge: https://shopify.dev/apps/tools/app-bridge
+- Seesion Tokens: https://shopify.dev/apps/auth/session-tokens
 
-### `yarn test`
+## Query Parameters
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Shopify calls the app by appending query paramters to each call.
 
-### `yarn build`
+Example HTTP Access Log for the initial load:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```GET /?hmac=6ebc0f248f559dc54f18dcb856dd3e859064608ea3e4bda9ca571365f5e867f4&host=d2lsbGYtc2hvcC5teXNob3BpZnkuY29tL2FkbWlu&locale=en-SG&session=72807b7ebab0e3aa4104fc06d8ee1d75f21a06c0e941ff71e41814f9a6f30a60&shop=willf-shop.myshopify.com&timestamp=1630225791```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The `host` parameter is base64 encoded of the shop name.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Session Token
 
-### `yarn eject`
+Use App Bridge to get the session token automatically.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Example session token:
+```eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3dpbGxmLXNob3AubXlzaG9waWZ5LmNvbS9hZG1pbiIsImRlc3QiOiJodHRwczovL3dpbGxmLXNob3AubXlzaG9waWZ5LmNvbSIsImF1ZCI6Ijg1NmM2OGRkNGQ4MmNlMDJiNTJmMGNkNWYwZjQxMzJiIiwic3ViIjoiNzY1NTQyNDAyMDAiLCJleHAiOjE2MzAyMzY3MjYsIm5iZiI6MTYzMDIzNjY2NiwiaWF0IjoxNjMwMjM2NjY2LCJqdGkiOiJlMWQyZDBmOS1hMDVkLTQ4OGQtOWFhYi0xNGQ5M2ZiNDQ4NWYiLCJzaWQiOiIwNmIwNzhlODdiMTlmMzZiOTNlZmEwMWY4MzRlYmE1ZjQ2ZTdhMjI0YmZjOTRkYzRkODA2YTIzYjAyN2U0OTA0In0.hYO6jxfmPzkImAT-AGhuwYln3TIWBULXUwwvQCx38E0```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Decoded Payload:
+```{
+  "iss": "https://willf-shop.myshopify.com/admin",
+  "dest": "https://willf-shop.myshopify.com",
+  "aud": "856c68dd4d82ce02b52f0cd5f0f4132b",
+  "sub": "76554240200",
+  "exp": 1630236726,
+  "nbf": 1630236666,
+  "iat": 1630236666,
+  "jti": "e1d2d0f9-a05d-488d-9aab-14d93fb4485f",
+  "sid": "06b078e87b19f36b93efa01f834eba5f46e7a224bfc94dc4d806a23b027e4904"
+}
+```
