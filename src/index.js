@@ -5,12 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '@shopify/polaris/dist/styles.css';
 import enTranslations from '@shopify/polaris/locales/en.json';
-import { AppProvider} from '@shopify/polaris';
+import {AppProvider} from '@shopify/polaris';
+import {Provider, Loading} from '@shopify/app-bridge-react';
+
+const config = {apiKey: '856c68dd4d82ce02b52f0cd5f0f4132b', host: 'd2lsbGYtc2hvcC5teXNob3BpZnkuY29tL2FkbWlu'};
 
 ReactDOM.render(
   <React.StrictMode>
     <AppProvider i18n={enTranslations}>
-      <App />
+      <Provider config={config}>
+        <Loading />
+        <App />
+      </Provider>
     </AppProvider>
   </React.StrictMode>,
   document.getElementById('root')
