@@ -1,13 +1,20 @@
-import { CalloutCard, DisplayText, Page, Stack } from "@shopify/polaris";
+import React from 'react'
+import { CalloutCard, DisplayText, Page, Stack } from '@shopify/polaris'
 
-const App = ({ client }) => {
+import { ClientResponse } from './api'
+
+interface Props {
+  client: ClientResponse
+}
+
+const App = ({ client }: Props) => {
   let activeText = ''
-  
-  if (client && client.active) {
+
+  if (client?.active) {
     activeText = 'active 🚀'
-  } 
-  
-  if (client && !client.active) {
+  }
+
+  if (!client?.active) {
     activeText = 'inactive 🚨'
   }
 
@@ -20,7 +27,7 @@ const App = ({ client }) => {
           illustration="https://s3.ap-southeast-1.amazonaws.com/cdn.referralcandy.com/images/shopify-embedded-app/stats.png"
           primaryAction={{
             content: 'View Referral Sales',
-            url: 'https://my.referralcandy.com/analytics',
+            url: 'https://my.referralcandy.com/analytics'
           }}
         >
           <p>The industry average referral rate is 2.56%. Promote more to boost your referral rate</p>
@@ -30,14 +37,14 @@ const App = ({ client }) => {
           illustration="https://s3.ap-southeast-1.amazonaws.com/cdn.referralcandy.com/images/shopify-embedded-app/email.png"
           primaryAction={{
             content: 'Email Past Customers',
-            url: 'https://my.referralcandy.com/in_app_invite',
+            url: 'https://my.referralcandy.com/in_app_invite'
           }}
         >
           <p>Increase the number of people who know about your program</p>
         </CalloutCard>
       </Stack>
     </Page>
-  );
+  )
 }
 
-export default App;
+export default App
