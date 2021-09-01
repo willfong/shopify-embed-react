@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, useHistory } from 'react-router-dom';
 import enTranslations from '@shopify/polaris/locales/en.json';
@@ -7,11 +7,11 @@ import { Provider as AppBridgeProvider } from '@shopify/app-bridge-react';
 import createApp from "@shopify/app-bridge";
 import { getSessionToken } from "@shopify/app-bridge-utils";
 
-import './index.css';
 import '@shopify/polaris/dist/styles.css';
 
 import reportWebVitals from './reportWebVitals';
 import App from './App';
+import { mockGetClient } from './api';
 
 const getShopifySessionToken = async (config) => {
   const app = createApp(config);
@@ -22,21 +22,24 @@ const getShopifySessionToken = async (config) => {
 
 function ConfigRouter() {
   let history = useHistory();
-
   const queryString = new URLSearchParams(history.location.search);
   const host = queryString.get('host');
+
+  const [client, setClient] = useState(null);
+
+  const config = useMemo(() => ({ apiKey: 'c94085f29d9ee338802c711f39860e73', host}), [host]);
+
+  useEffect(() => {
+    mockGetClient(getShopifySessionToken(config)).then((data) => setClient(data))
+  }, [config])
 
   if (!host) {
     return <h1>This is a Shopify embedded app and should be loaded within Shopify</h1>;
   }
-
-  const config = { apiKey: '856c68dd4d82ce02b52f0cd5f0f4132b', host};
-
-  getShopifySessionToken(config);
   
   return ( 
     <AppBridgeProvider config={config}>
-      <App />
+      <App client={client} />
     </AppBridgeProvider>
   );
 }
