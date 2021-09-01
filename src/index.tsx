@@ -10,7 +10,7 @@ import { getSessionToken } from '@shopify/app-bridge-utils'
 import '@shopify/polaris/dist/styles.css'
 
 import App from './App'
-import { getMockClient } from './api'
+import { getClient } from './api'
 
 interface Config {
   apiKey: string,
@@ -23,7 +23,7 @@ function ConfigRouter () {
   const host = queryString.get('host') ?? ''
 
   const [sessionToken, setSessionToken] = useState('')
-  const [client, setClient] = useState({ clientId: 0 })
+  const [data, setData] = useState({ success: false })
 
   const config: Config = { apiKey: 'c94085f29d9ee338802c711f39860e73', host }
 
@@ -34,9 +34,9 @@ function ConfigRouter () {
     setSessionToken(sessionToken)
   }
 
-  const getClient = async (sessionToken: string): Promise<void> => {
-    const clientData = await getMockClient(sessionToken)
-    setClient(clientData)
+  const getClientData = async (sessionToken: string): Promise<void> => {
+    const res = await getClient(sessionToken)
+    setData(res)
   }
 
   useEffect(() => {
@@ -45,7 +45,7 @@ function ConfigRouter () {
 
   useEffect(() => {
     if (sessionToken !== '') {
-      getClient(sessionToken)
+      getClientData(sessionToken)
     }
   }, [sessionToken])
 
@@ -55,7 +55,7 @@ function ConfigRouter () {
 
   return (
     <AppBridgeProvider config={config}>
-      <App client={client} />
+      <App data={data} />
     </AppBridgeProvider>
   )
 }
