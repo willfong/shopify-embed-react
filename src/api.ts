@@ -18,5 +18,5 @@ export const getClient = (sessionToken: string): Promise<Response> => {
     headers: {
       authorization: `Bearer ${sessionToken}`
     }
-  })
+  }).then((response) => response.data)
 }

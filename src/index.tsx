@@ -23,7 +23,7 @@ function ConfigRouter () {
   const host = queryString.get('host') ?? ''
 
   const [sessionToken, setSessionToken] = useState('')
-  const [data, setData] = useState({ success: false })
+  const [clientData, setClientData] = useState({ success: false })
 
   const config: Config = { apiKey: 'c94085f29d9ee338802c711f39860e73', host }
 
@@ -35,8 +35,8 @@ function ConfigRouter () {
   }
 
   const getClientData = async (sessionToken: string): Promise<void> => {
-    const res = await getClient(sessionToken)
-    setData(res)
+    const response = await getClient(sessionToken)
+    setClientData(response)
   }
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function ConfigRouter () {
 
   return (
     <AppBridgeProvider config={config}>
-      <App data={data} />
+      <App clientData={clientData} />
     </AppBridgeProvider>
   )
 }

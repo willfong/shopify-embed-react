@@ -4,13 +4,13 @@ import { CalloutCard, DisplayText, Page, Stack } from '@shopify/polaris'
 import { Response } from './api'
 
 interface Props {
-  data: Response
+  clientData: Response
 }
 
-const App = ({ data }: Props) => {
+const App = ({ clientData }: Props) => {
   let activeText = ''
 
-  if (!data.success) {
+  if (!clientData.success) {
     return (
       <Page>
         <DisplayText size="large">Not signed up?</DisplayText>
@@ -18,11 +18,11 @@ const App = ({ data }: Props) => {
     )
   }
 
-  if (data?.active) {
+  if (clientData?.active) {
     activeText = 'active 🚀'
   }
 
-  if (!data?.active) {
+  if (!clientData?.active) {
     activeText = 'inactive 🚨'
   }
 
