@@ -13,7 +13,7 @@ import App from './App'
 import { getClient } from './api'
 
 interface Config {
-  apiKey: string,
+  apiKey: string
   host: string
 }
 
@@ -23,7 +23,7 @@ function ConfigRouter () {
   const host = queryString.get('host') ?? ''
 
   const [sessionToken, setSessionToken] = useState('')
-  const [clientData, setClientData] = useState({ success: false })
+  const [clientData, setClientData] = useState({})
 
   const config: Config = { apiKey: 'c94085f29d9ee338802c711f39860e73', host }
 
@@ -50,7 +50,11 @@ function ConfigRouter () {
   }, [sessionToken])
 
   if (host === '') {
-    return <h1>This is a Shopify embedded app and should be loaded within Shopify</h1>
+    return (
+      <h1>
+        This is a Shopify embedded app and should be loaded within Shopify
+      </h1>
+    )
   }
 
   return (
