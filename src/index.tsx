@@ -17,7 +17,7 @@ interface Config {
   host: string
 }
 
-function ConfigRouter () {
+function ConfigRouter() {
   const history = useHistory()
   const queryString = new URLSearchParams(history.location.search)
   const host = queryString.get('host') ?? ''
@@ -50,9 +50,7 @@ function ConfigRouter () {
 
   if (host === '') {
     return (
-      <p>
-        This is a Shopify embedded app and should be loaded within Shopify
-      </p>
+      <p>This is a Shopify embedded app and should be loaded within Shopify</p>
     )
   }
 

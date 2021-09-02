@@ -43,7 +43,9 @@ const App = ({ clientData }: Props) => {
   if (!clientData.success) {
     return (
       <Page>
-        <DisplayText size="large">Not signed up?</DisplayText>
+        <DisplayText size="large">
+          {"You don't have a ReferralCandy account, please sign up"}
+        </DisplayText>
       </Page>
     )
   }

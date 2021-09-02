@@ -5,8 +5,8 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",
-    "lint": "yarn eslint src/* && tsc && yarn prettier --check src/*",
-    "fix": "yarn eslint src/* --fix && yarn prettier --write src/*"
+    "lint": "tsc --noEmit && yarn eslint src/**/*.{ts,tsx} && yarn prettier --check \"src/**/*.{ts,tsx}\"",
+    "fix": "yarn eslint src/**/*.{ts,tsx} --fix && yarn prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@babel/runtime": "^7.15.3",
