@@ -1,20 +1,28 @@
 import React from 'react'
 import { CalloutCard, DisplayText, Page, Stack } from '@shopify/polaris'
 
-import { ClientResponse } from './api'
+import { Response } from './api'
 
 interface Props {
-  client: ClientResponse
+  clientData: Response
 }
 
-const App = ({ client }: Props) => {
+const App = ({ clientData }: Props) => {
   let activeText = ''
 
-  if (client?.active) {
+  if (!clientData.success) {
+    return (
+      <Page>
+        <DisplayText size="large">Not signed up?</DisplayText>
+      </Page>
+    )
+  }
+
+  if (clientData?.active) {
     activeText = 'active 🚀'
   }
 
-  if (!client?.active) {
+  if (!clientData?.active) {
     activeText = 'inactive 🚨'
   }
 
