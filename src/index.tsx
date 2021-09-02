@@ -30,7 +30,6 @@ function ConfigRouter () {
   const getShopifySessionToken = async (config: Config): Promise<void> => {
     const app = createApp(config)
     const sessionToken = await getSessionToken(app)
-    console.log(sessionToken)
     setSessionToken(sessionToken)
   }
 
@@ -51,9 +50,9 @@ function ConfigRouter () {
 
   if (host === '') {
     return (
-      <h1>
+      <p>
         This is a Shopify embedded app and should be loaded within Shopify
-      </h1>
+      </p>
     )
   }
 
