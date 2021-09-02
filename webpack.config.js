@@ -1,10 +1,13 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const ENVIRONMENT = process.env.NODE_ENV || 'development'
 
 module.exports = {
   entry: './src/index.tsx',
   output: { path: path.join(__dirname, 'build'), filename: 'index.bundle.js' },
-  mode: process.env.NODE_ENV || 'development',
+  mode: ENVIRONMENT,
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
@@ -31,6 +34,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: ENVIRONMENT
+    }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html')
     })

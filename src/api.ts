@@ -1,9 +1,7 @@
 import axios from 'axios'
 
-const RC_API_ENDPOINT = 'https://api.dev.anafore.com/staging'
-
 export interface Response {
-  success?: boolean,
+  success?: boolean
   clientId?: number
   onboardingIncomplete?: boolean
   active?: boolean
@@ -13,9 +11,14 @@ export interface Response {
   }
 }
 
+const RC_API_HOST =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.referralcandy.com/v1'
+    : 'https://api.dev.anafore.com/staging'
+
 export const getClient = (sessionToken: string): Promise<Response> => {
   return axios
-    .get(RC_API_ENDPOINT + '/shopify/client', {
+    .get(RC_API_HOST + '/shopify/client', {
       headers: {
         authorization: `Bearer ${sessionToken}`
       }
