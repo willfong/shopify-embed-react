@@ -13,24 +13,23 @@ import App from './App'
 import { getClient } from './api'
 
 interface Config {
-  apiKey: string,
+  apiKey: string
   host: string
 }
 
-function ConfigRouter () {
+function ConfigRouter() {
   const history = useHistory()
   const queryString = new URLSearchParams(history.location.search)
   const host = queryString.get('host') ?? ''
 
   const [sessionToken, setSessionToken] = useState('')
-  const [clientData, setClientData] = useState({ success: false })
+  const [clientData, setClientData] = useState({})
 
   const config: Config = { apiKey: 'c94085f29d9ee338802c711f39860e73', host }
 
   const getShopifySessionToken = async (config: Config): Promise<void> => {
     const app = createApp(config)
     const sessionToken = await getSessionToken(app)
-    console.log(sessionToken)
     setSessionToken(sessionToken)
   }
 
@@ -50,7 +49,9 @@ function ConfigRouter () {
   }, [sessionToken])
 
   if (host === '') {
-    return <h1>This is a Shopify embedded app and should be loaded within Shopify</h1>
+    return (
+      <p>This is a Shopify embedded app and should be loaded within Shopify</p>
+    )
   }
 
   return (
